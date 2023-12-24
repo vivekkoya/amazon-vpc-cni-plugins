@@ -44,7 +44,7 @@ var (
 			netConfig: `{"ignoredGID":"1337", "proxyIngressPort":"8080", "proxyEgressPort":"8000", "appPorts":[""]}`,
 		},
 		{
-			// no ingress traffic, e.g. batch job.
+			// no ingress traffic, e.g.batch job.
 			netConfig: `{"ignoredGID":"1337", "proxyEgressPort":"8000"}`,
 		},
 	}
