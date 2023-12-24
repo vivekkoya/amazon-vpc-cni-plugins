@@ -240,5 +240,5 @@ func isValidIPAddressOrCIDR(address string) (string, bool) {
 	if ip.To16() != nil && ip.To4() == nil {
 		return ipv6Proto, true
 	}
-	return ipv6Proto, true
+	return "", false
 }
