@@ -227,11 +227,18 @@ func isValidIPAddressOrCIDR(address string) (string, bool) {
 			return "", false
 		}
 	}
-
-	// There's no To6() method in the `net` package. Instead, just check that
-	// it's not a valid `v4` IP.
-	if ip.To4() != nil {
+	// - When IP.To16() == nil and IP.To4() != nil,
+	//   the raw connection consists of an IPv4
+	//   socket using only IPv4 addresses.
+	if ip.To16() == nil && ip.To4() != nil {
 		return ipv4Proto, true
+	}
+	// - When IP.To16() != nil and IP.To4() == nil,
+	//   we can assume that the raw connection
+	//   consists of an IPv6 socket using only
+	//   IPv6 addresses.
+	if ip.To16() != nil && ip.To4() == nil {
+		return ipv6Proto, true
 	}
 	return ipv6Proto, true
 }
