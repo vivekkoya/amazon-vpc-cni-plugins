@@ -170,6 +170,7 @@ func TestIsValidIPAddressOrCIDR(t *testing.T) {
 		{ip: "123.222.333.444/24", expectedProto: "", expectedValid: false},
 		{ip: "123.222..444", expectedProto: "", expectedValid: false},
 		{ip: "123.222/333.444", expectedProto: "", expectedValid: false},
+		{ip: "0000:0000:0000:0000:0000:ffff:0808:0808/32",  expectedProto: ipv6Proto, expectedValid: true}
 	}
 	for _, ip := range ips {
 		proto, valid := isValidIPAddressOrCIDR(ip.ip)
